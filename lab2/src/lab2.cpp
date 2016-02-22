@@ -58,6 +58,26 @@ void student::pack(string fname)
 	 f1.close();
 
 }
+void student::search(string key,string fname)
+{
+	student s[10];
+	int i=0,count=0;
+	ifstream myf(fname.c_str());
+	while(!myf.eof())
+	{
+		cout<<"in search";
+		s[i].unpack(fname);
+		if(key==s[i].usn)
+		{
+			cout<<"record found\n";
+			cout<<s[i].usn<<"\t"<<s[i].name;
+			break;
+
+		}
+		i++;
+	}
+	myf.close();
+}
 
 int main()
 { 	student s;
