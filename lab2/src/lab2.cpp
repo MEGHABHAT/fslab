@@ -24,10 +24,11 @@ private:string name;
         string branch;
         string sem;
 public:void pack(string fname);
-       /*void unpack();
-       void modify();
-       int search();
-       int delet();*/
+       void unpack(string);
+       void unpack(ifstream &);
+       //void modify();
+       void search(string,string);
+      // int delet();
        void read();
        //void write();
 };
@@ -62,11 +63,11 @@ void student::search(string key,string fname)
 {
 	student s[10];
 	int i=0,count=0;
-	ifstream myf(fname.c_str());
-	while(!myf.eof())
+	ifstream f1(fname.c_str());
+	while(!f1.eof())
 	{
 		cout<<"in search";
-		s[i].unpack(fname);
+		s[i].unpack(f1);
 		if(key==s[i].usn)
 		{
 			cout<<"record found\n";
@@ -76,31 +77,59 @@ void student::search(string key,string fname)
 		}
 		i++;
 	}
-	myf.close();
+	f1.close();
+}
+void student::unpack(ifstream &f1)
+{
+	string temp;
+	getline(f1,usn,'|');
+	getline(f1,name,'|');
+	getline(f1,branch,'|');
+	getline(f1,sem,'$');
+	getline(f1,temp);
+}
+void student::unpack(string fname)
+{
+	string temp;
+	ifstream f1(fname.c_str());
+	getline(f1,usn,'|');
+	getline(f1,name,'|');
+	getline(f1,branch,'|');
+	getline(f1,sem,'$');
+	f1.close();
 }
 
 int main()
-{ 	student s;
-	string fname;
+{
+	student s;
+	string fname,key;
 	int choice;
+	while(1)
+	{
+		 cout<<"1.insert 2.search 3.delete 4.modify\n";
+		 cout<<"enter ur choice";
+		 cin>>choice;
+		 switch(choice)
+		 {
+		 case 1:
 
-
-			  cout<<"enter the filename";
+	          cout<<"enter the filename";
 		       cin>>fname;
-			   s.read();
-			   cout<<"After read\n";
+		       s.read();
 		      s.pack(fname);
-		       /*break;
-		//case 2:search();
-		  //     break;
+		       break;
+		case 2:cout<<"enter usn to be searched\n";
+		       cin>>key;
+		       s.search(key,fname);
+		       break;
 
 		//case 3:delet();
 		    //   break;
 		//case 4:modify();
 		   //    break;
-		default:cout<<"terminates";
-		break;
+		//default:cout<<"terminates";
+		//break;
 		}
-	}*/
+	}
 		       return 0;
 }
