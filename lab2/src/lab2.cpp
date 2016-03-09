@@ -90,23 +90,37 @@ void student::unpack(ifstream &f1)
 
 void student::modify(string fname)
 {
-  string key,buffer;
-	fstream f1;
-  cout<<"enter key to be searched";
-  cin>>key;
-  int pos=search(key,fname);
-	pos=pos-101;
-  if(pos>0)
-  {
-    cout<<"enter the new usn\n";
-    cin>>usn;
-  }
- 	 f1.open(fname.c_str());
-	buffer=usn+'|'+name+'|'+branch+'|'+sem;
-	buffer.resize(100,'$');
-	 f1.seekp(pos,ios::beg);
-         f1<<buffer<<endl;
-	 f1.close();
+	string buffer,key;
+	fstream file;
+	int choice,pos;
+	cout<<"Enter the usn to be searched\n";
+	cin>>key;
+	cout<<"enter the filename";
+			cin>>fname;
+	pos=search(key,fname);
+	pos=pos-100;
+	if(pos){
+	cout<<"\n What to modify?";
+	cin>>choice;
+
+	switch(choice)
+	{
+		case 1: cout<<"\nUSN:"; cin>>usn; break;
+		case 2:	cout<<"\nName:";cin>>name;break;
+		case 3:	cout<<"\nBranch:";cin>>branch;break;
+		case 4:	cout<<"\nSemster:";cin>>sem;break;
+		default: cout <<"Wrong Choice";
+	}
+
+
+	file.open(fname.c_str(),ios::out);
+	pos-=101;//skip $\n
+	file.seekp(pos,ios::beg);
+	pack(fname);
+	file.close();
+	}
+	else
+		exit(0);
 }
 
 int main()
