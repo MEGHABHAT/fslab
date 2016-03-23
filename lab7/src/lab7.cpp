@@ -89,10 +89,10 @@ void coseq::sort_list()
 	  }
 	}
 
-/*	for(i=0;i<=count1;i++)
+	for(i=0;i<=count1;i++)
 	{
 		cout<<"\nsorted list1 "<<list1[i];
-	}*/
+	}
 	for (i=0;i<=count2;i++)
 	{
 	  for (j=i+1;j<=count2;j++)
@@ -105,10 +105,10 @@ void coseq::sort_list()
 		}
 	  }
 	}
-/*	for(i=0;i<=count2;i++)
+	for(i=0;i<=count2;i++)
 	{
 		cout<<"\nsorted list2 "<<list2[i];
-	}*/
+	}
 
 }
 
